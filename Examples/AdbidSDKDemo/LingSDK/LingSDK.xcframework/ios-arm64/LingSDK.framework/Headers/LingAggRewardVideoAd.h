@@ -73,6 +73,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///是否准备好
 - (BOOL)isReady;
 
+/// 与底层 Leadmoad / Ling 对齐，内部转发 showAd:
+- (void)showAdFromViewController:(UIViewController *)viewController;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -368,38 +368,14 @@
     // 弹出选择环境的弹窗
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请选择环境" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 
-    // 选项1：切换测试
-    UIAlertAction *testAction = [UIAlertAction actionWithTitle:@"切换到10011" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self saveEnvironmentAndShowRestartAlert:EnvironmentType_Test_10011];
-    }];
-
-    // 选项2：切换10004
     UIAlertAction *productAction = [UIAlertAction actionWithTitle:@"切换到10004" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self saveEnvironmentAndShowRestartAlert:EnvironmentType_Test_10004];
-    }];
-
-    UIAlertAction *product10004SAction = [UIAlertAction actionWithTitle:@"切换到10004S" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self saveEnvironmentAndShowRestartAlert:EnvironmentType_Test_10004S];
-    }];
-    
-    // 选项3：切换10002
-    UIAlertAction *appId10002Action = [UIAlertAction actionWithTitle:@"切换到10002" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self saveEnvironmentAndShowRestartAlert:EnvironmentType_Test_10002];
-    }];
-
-    // 选项4：切换10027
-    UIAlertAction *appId10027Action = [UIAlertAction actionWithTitle:@"切换到10027" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self saveEnvironmentAndShowRestartAlert:EnvironmentType_Test_10027];
     }];
 
     // 取消
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
 
-    [alert addAction:testAction];
     [alert addAction:productAction];
-    [alert addAction:product10004SAction];
-    [alert addAction:appId10002Action];
-    [alert addAction:appId10027Action];
     [alert addAction:cancelAction];
 
     alert.popoverPresentationController.sourceView = sender;
@@ -426,16 +402,7 @@
 }
 
 - (NSString *)currentSelectedPlatform {
-    NSArray *savedPlatforms = [AppConfig selectedPlatforms];
-    for (NSString *platform in savedPlatforms) {
-        if ([self.options containsObject:platform]) {
-            return platform;
-        }
-    }
-    if ([self.options containsObject:@"other"]) {
-        return @"other";
-    }
-    return self.options.firstObject;
+    return @"LM";
 }
 
 - (void)showSingleSelectPlatformPopup {

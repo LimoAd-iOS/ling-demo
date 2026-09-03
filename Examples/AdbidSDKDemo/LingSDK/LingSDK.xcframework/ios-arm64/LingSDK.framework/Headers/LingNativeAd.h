@@ -34,6 +34,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)nativeAdViewDidExpose:(LingNativeAd *)nativeAd;
 
+/// 与聚合层 Adbid 委托名对齐
+- (void)nativeAdViewDidClick:(LingNativeAd *)nativeAd;
+
 @end
 
 @interface LingNativeAd : NSObject
@@ -90,6 +93,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 检查广告是否可以展示
 - (BOOL)isReady;
+
+- (void)registerContainer:(__kindof UIView *)containerView
+            mainImageView:(__kindof UIView *_Nullable)mainImageView
+       withClickableViews:(NSArray<__kindof UIView *> *_Nullable)clickableViews
+              extraConfig:(nullable NSDictionary *)extraConfig;
+
+- (NSString *)getRequestId;
 
 @end
 

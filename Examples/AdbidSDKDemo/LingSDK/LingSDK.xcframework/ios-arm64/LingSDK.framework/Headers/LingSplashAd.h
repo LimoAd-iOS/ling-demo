@@ -38,6 +38,9 @@ typedef NS_ENUM(NSInteger, LingSplashAdLandingPageType) {
 ///跳到站外边
 - (void)splashAdDidJumpToAppOutside:(LingSplashAd *)splashAd interactionType:(LingSplashAdLandingPageType)interactionType;
 
+/// 与聚合层 Adbid 委托名对齐
+- (void)splashAdDidFinishConversion:(LingSplashAd *)splashAd interactionType:(LingSplashAdLandingPageType)interactionType;
+
 @end
 
 @interface LingSplashAd : NSObject
@@ -82,6 +85,12 @@ typedef NS_ENUM(NSInteger, LingSplashAdLandingPageType) {
 /// 竞胜/竞败上报
 - (void)winNotice:(NSInteger)price;
 - (void)lossNotice:(LingAdBidLossInfo *)info;
+
+/// 与聚合层 isReady 对齐
+- (BOOL)isReady;
+
+@property (nonatomic, strong, nullable) UIViewController *viewController;
+- (NSString *)getRequestId;
 
 @end
 

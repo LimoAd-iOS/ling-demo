@@ -5,8 +5,8 @@
 //  Created by youzhadoubao on 2025/9/17.
 //
 
-#ifndef LingAdPublicDefine_h
-#define LingAdPublicDefine_h
+#ifndef LingAggPublicDefine_h
+#define LingAggPublicDefine_h
 
 /// 交互类型
 typedef NS_ENUM(NSInteger, LingAggAdRedirectionType) {
@@ -137,7 +137,7 @@ typedef NS_ENUM(NSInteger, LingAggErrorCode) {
 };
 
 // 错误描述细化，明确指出是广告ID缺失
-static inline NSString *LingAdErrorDescription(LingAggErrorCode code) {
+static inline NSString *LingAggErrorDescription(LingAggErrorCode code) {
     switch (code) {
         // ... 其他描述
         case LingAggErrorCodeInitFailed:
@@ -166,4 +166,4 @@ static inline NSString *LingAdErrorDescription(LingAggErrorCode code) {
     }
 }
 
-#endif /* LingAdPublicDefine_h */
+#endif /* LingAggPublicDefine_h */

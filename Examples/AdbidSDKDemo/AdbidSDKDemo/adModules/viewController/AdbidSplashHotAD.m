@@ -9,9 +9,9 @@
 #import "AppConfig.h"
 #import "AppDelegate.h"
 
-@interface AdbidSplashHotAD ()<AdbidSplashAdDelegate>
+@interface AdbidSplashHotAD ()<LingAggSplashAdDelegate>
 /// 广告实例
-@property (nonatomic, strong) AdbidSplashAd *splashHotAD;
+@property (nonatomic, strong) LingAggSplashAd *splashHotAD;
 /// 是否已加载完成
 @property (nonatomic, assign) BOOL havedLoad;
 
@@ -58,7 +58,7 @@
     if (self.havedLoad) {
         [self showLimoSplashHotAD];
     } else {
-        self.splashHotAD = [[AdbidSplashAd alloc] initWithSlotId:[AppConfig hotID]];
+        self.splashHotAD = [[LingAggSplashAd alloc] initWithSlotId:[AppConfig hotID]];
         self.splashHotAD.delegate = self;
         
         AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -97,8 +97,8 @@
     [self loadOrShowSplashHotAD];
 }
 
-#pragma mark - AdbidSplashAdDelegate
-- (void)splashAdDidLoad:(AdbidSplashAd *)splashAd {
+#pragma mark - LingAggSplashAdDelegate
+- (void)splashAdDidLoad:(LingAggSplashAd *)splashAd {
     BOOL callbackOnMainThread = [NSThread isMainThread];
     NSLog(@"热启动开屏广告加载成功回调 isMainThread=%@ 当前线程=%@",
           callbackOnMainThread ? @"YES" : @"NO",
@@ -111,7 +111,7 @@
     }];
 }
 
-- (void)splashAd:(AdbidSplashAd *)splashAd didFailToLoadWithError:(NSError *)error {
+- (void)splashAd:(LingAggSplashAd *)splashAd didFailToLoadWithError:(NSError *)error {
     [self performOnMainThread:^{
         self.havedLoad = NO;
         if ([self.delegate respondsToSelector:@selector(splashHotAdLoadFailed:)]) {
@@ -120,7 +120,7 @@
     }];
 }
 
-- (void)splashAdDidShow:(AdbidSplashAd *)splashAd {
+- (void)splashAdDidShow:(LingAggSplashAd *)splashAd {
     [self performOnMainThread:^{
         if ([self.delegate respondsToSelector:@selector(splashHotAdDidShow)]) {
             [self.delegate splashHotAdDidShow];
@@ -128,7 +128,7 @@
     }];
 }
 
-- (void)splashAd:(AdbidSplashAd *)splashAd didFailToShowWithError:(NSError *)error {
+- (void)splashAd:(LingAggSplashAd *)splashAd didFailToShowWithError:(NSError *)error {
     [self performOnMainThread:^{
         self.havedLoad = NO;
         if ([self.delegate respondsToSelector:@selector(splashHotAdShowFailed:)]) {
@@ -138,7 +138,7 @@
     }];
 }
 
-- (void)splashAdDidClick:(AdbidSplashAd *)splashAd {
+- (void)splashAdDidClick:(LingAggSplashAd *)splashAd {
     [self performOnMainThread:^{
         if ([self.delegate respondsToSelector:@selector(splashHotAdDidClick)]) {
             [self.delegate splashHotAdDidClick];
@@ -146,7 +146,7 @@
     }];
 }
 
-- (void)splashAdDidClose:(AdbidSplashAd *)splashAd {
+- (void)splashAdDidClose:(LingAggSplashAd *)splashAd {
     [self performOnMainThread:^{
         if ([self.delegate respondsToSelector:@selector(splashHotAdDidClose)]) {
             [self.delegate splashHotAdDidClose];
@@ -155,7 +155,7 @@
     }];
 }
 
-- (void)splashAdDidFinishConversion:(AdbidSplashAd *)interstitialAd interactionType:(AdbidAdRedirectionType)interactionType {
+- (void)splashAdDidFinishConversion:(LingAggSplashAd *)interstitialAd interactionType:(LingAggAdRedirectionType)interactionType {
     [self performOnMainThread:^{
         if ([self.delegate respondsToSelector:@selector(splashHotAdDeepLinkOrJump:)]) {
             [self.delegate splashHotAdDeepLinkOrJump:YES];

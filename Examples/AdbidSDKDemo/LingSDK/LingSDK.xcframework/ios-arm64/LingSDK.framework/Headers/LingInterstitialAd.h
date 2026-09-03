@@ -38,6 +38,11 @@ typedef NS_ENUM(NSInteger, LingInterstitialAdLandingPageType) {
 ///跳到站外边
 - (void)interstitialAdDidJumpToAppOutside:(LingInterstitialAd *)InterstitialAd interactionType:(LingInterstitialAdLandingPageType)interactionType;
 
+/// 与聚合层 Adbid 委托名对齐
+- (void)interstitialAdFailedToLoad:(LingInterstitialAd *)interstitialAd withError:(NSError *)error;
+- (void)interstitialAdFailedToShow:(LingInterstitialAd *)interstitialAd withError:(NSError *)error;
+- (void)interstitialAdDidFinishConversion:(LingInterstitialAd *)interstitialAd interactionType:(LingInterstitialAdLandingPageType)interactionType;
+
 @end
 
 @interface LingInterstitialAd : NSObject
@@ -71,6 +76,11 @@ typedef NS_ENUM(NSInteger, LingInterstitialAdLandingPageType) {
 /// 竞胜/竞败上报
 - (void)winNotice:(NSInteger)price;
 - (void)lossNotice:(LingAdBidLossInfo *)info;
+
+/// 与聚合层 isReady 对齐
+- (BOOL)isReady;
+
+- (NSString *)getRequestId;
 
 @end
 

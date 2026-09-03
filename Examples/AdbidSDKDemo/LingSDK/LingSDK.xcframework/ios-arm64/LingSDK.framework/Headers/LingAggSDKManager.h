@@ -22,7 +22,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSDictionary *)allServerBidTokenConfigs;
 
++ (nullable NSDictionary *)serverBidTokenConfigForPositionId:(NSString *)positionId;
+
 + (NSString*)sdkVersion;
+
+/// 初始化前设置。@"caid_value" / @"caid_version"
++ (void)setExtraUserData:(NSDictionary <NSString *, NSString *> *)userDictionary;
+
+/// 初始化前设置 CAID 列表，转发到底层 Leadmoad
++ (void)setUserCaids:(NSArray *)caids;
 
 @end
 

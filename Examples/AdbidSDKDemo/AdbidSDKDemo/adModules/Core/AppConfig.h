@@ -13,11 +13,7 @@ FOUNDATION_EXPORT NSNotificationName const AppConfigDidChangeNotification;
 
 // 环境定义
 typedef NS_ENUM(NSInteger, EnvironmentType) {
-    EnvironmentType_Test_10004 = 0,     // 10004测试环境
-    EnvironmentType_Test_10011 = 1,     // 10011测试环境
-    EnvironmentType_Test_10027 = 2,     // 10027测试环境
-    EnvironmentType_Test_10002 = 3,     // 10002测试环境
-    EnvironmentType_Test_10004S = 4      // 开发环境
+    EnvironmentType_Test_10004 = 0      // 10004测试环境
 };
 
 @interface AppConfig : NSObject

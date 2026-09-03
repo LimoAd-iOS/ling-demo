@@ -43,6 +43,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 激励视频播放完成，用户获得奖励
 - (void)rewardVideoAdDidReward:(LingRewardVideoAd *)rewardVideoAd;
 
+/// 与聚合层 Adbid 委托名对齐
+- (void)rewardVideoAdDidStartPlay:(LingRewardVideoAd *)rewardedVideoAd;
+- (void)rewardVideoAdDidEndPlay:(LingRewardVideoAd *)rewardedVideoAd withError:(NSError *_Nullable)error;
+- (void)rewardVideoAdDidFinishConversion:(LingRewardVideoAd *)rewardVideoAd interactionType:(LingSplashLandingPageType)interactionType;
+
 @end
 
 @interface LingRewardVideoAd : NSObject
@@ -89,6 +94,11 @@ NS_ASSUME_NONNULL_BEGIN
 // 竞胜/竞败上报
 - (void)winNotice:(NSInteger)price;
 - (void)lossNotice:(LingAdBidLossInfo *)info;
+
+/// 与聚合层 Adbid / LingAgg 对齐，内部转发 showAdFromViewController:
+- (void)showAd:(UIViewController *)viewController;
+
+- (NSString *)getRequestId;
 
 @end
 

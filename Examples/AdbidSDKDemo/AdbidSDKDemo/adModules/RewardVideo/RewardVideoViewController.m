@@ -269,7 +269,7 @@
 
 - (void)setupRewardVideoAd {
     NSString *slotId = self.slotIdTextField.text;
-    self.rewardVideoAd = [[LingRewardVideoAd alloc] initWithSlotId:slotId];
+    self.rewardVideoAd = [[LingAggRewardVideoAd alloc] initWithSlotId:slotId];
     self.rewardVideoAd.delegate = self;
     self.rewardVideoAd.shouldMuted = NO;
     [self addLog:[NSString stringWithFormat:@"激励视频广告实例已创建，广告位ID: %@", slotId]];
@@ -292,7 +292,7 @@
     // 如果广告位ID发生变化，重新创建广告实例
 //    if (!self.rewardVideoAd || ![currentSlotId isEqualToString:self.rewardVideoAd.description]) {
 //        [self addLog:[NSString stringWithFormat:@"广告位ID已更改为: %@，重新创建广告实例", currentSlotId]];
-//        self.rewardVideoAd = [[LingRewardVideoAd alloc] initWithSlotId:currentSlotId];
+//        self.rewardVideoAd = [[LingAggRewardVideoAd alloc] initWithSlotId:currentSlotId];
 //        self.rewardVideoAd.delegate = self;
 //    }
 
@@ -324,7 +324,7 @@
     [self requestServerBidTokenConfigBeforeLoadForRewardVideoAd:self.rewardVideoAd slotId:slotId];
 }
 
-- (void)requestServerBidTokenConfigBeforeLoadForRewardVideoAd:(LingRewardVideoAd *)rewardVideoAd
+- (void)requestServerBidTokenConfigBeforeLoadForRewardVideoAd:(LingAggRewardVideoAd *)rewardVideoAd
                                                        slotId:(NSString *)slotId {
 //    __weak typeof(self) weakSelf = self;
 //    CFAbsoluteTime methodStartTime = CFAbsoluteTimeGetCurrent();
@@ -421,9 +421,9 @@
     }
 }
 
-#pragma mark - LingRewardVideoAdDelegate
+#pragma mark - LingAggRewardVideoAdDelegate
 
-- (void)rewardVideoAdDidLoad:(LingRewardVideoAd *)rewardVideoAd {
+- (void)rewardVideoAdDidLoad:(LingAggRewardVideoAd *)rewardVideoAd {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self addLog:@"✅ 激励视频广告加载成功"];
         self.statusLabel.text = @"状态: 已加载，可以展示";
@@ -433,7 +433,7 @@
     });
 }
 
-- (void)rewardVideoAd:(LingRewardVideoAd *)rewardVideoAd didFailToLoadWithError:(NSError *)error {
+- (void)rewardVideoAd:(LingAggRewardVideoAd *)rewardVideoAd didFailToLoadWithError:(NSError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self addLog:[NSString stringWithFormat:@"❌ 激励视频广告加载失败: %@", error.localizedDescription]];
         self.statusLabel.text = @"状态: 加载失败";
@@ -443,14 +443,14 @@
     });
 }
 
-- (void)rewardVideoAdDidShow:(LingRewardVideoAd *)rewardVideoAd {
+- (void)rewardVideoAdDidShow:(LingAggRewardVideoAd *)rewardVideoAd {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self addLog:@"📺 激励视频广告开始展示"];
         self.statusLabel.text = @"状态: 正在展示";
     });
 }
 
-- (void)rewardVideoAd:(LingRewardVideoAd *)rewardVideoAd didFailToShowWithError:(NSError *)error {
+- (void)rewardVideoAd:(LingAggRewardVideoAd *)rewardVideoAd didFailToShowWithError:(NSError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self addLog:[NSString stringWithFormat:@"❌ 激励视频广告展示失败: %@", error.localizedDescription]];
         self.statusLabel.text = @"状态: 展示失败";
@@ -458,13 +458,13 @@
     });
 }
 
-- (void)rewardVideoAdDidStartPlay:(LingRewardVideoAd *)rewardVideoAd {
+- (void)rewardVideoAdDidStartPlay:(LingAggRewardVideoAd *)rewardVideoAd {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self addLog:@"▶️ 视频开始播放"];
     });
 }
 
-- (void)rewardVideoAdDidEndPlay:(LingRewardVideoAd *)rewardedVideoAd withError:(NSError *_Nullable)error {
+- (void)rewardVideoAdDidEndPlay:(LingAggRewardVideoAd *)rewardedVideoAd withError:(NSError *_Nullable)error {
     dispatch_async(dispatch_get_main_queue(), ^{
         if (error == nil) {
             [self addLog:@"⏹️ 视频播放完成"];
@@ -474,7 +474,7 @@
     });
 }
 
-- (void)rewardVideoAdDidReward:(LingRewardVideoAd *)rewardVideoAd {
+- (void)rewardVideoAdDidReward:(LingAggRewardVideoAd *)rewardVideoAd {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self addLog:@"🎁 用户获得奖励！"];
 
@@ -487,13 +487,13 @@
     });
 }
 
-- (void)rewardVideoAdDidClick:(LingRewardVideoAd *)rewardVideoAd {
+- (void)rewardVideoAdDidClick:(LingAggRewardVideoAd *)rewardVideoAd {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self addLog:@"👆 用户点击了广告"];
     });
 }
 
-- (void)rewardVideoAdDidClose:(LingRewardVideoAd *)rewardVideoAd {
+- (void)rewardVideoAdDidClose:(LingAggRewardVideoAd *)rewardVideoAd {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self addLog:@"❌ 激励视频广告已关闭"];
         self.statusLabel.text = @"状态: 已关闭，可重新加载";

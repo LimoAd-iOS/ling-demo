@@ -34,6 +34,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)configuration;
 
+/// 与聚合层 IDFA 对齐
+@property (nonatomic, copy) NSString *IDFA;
+
 @end
 
 NS_ASSUME_NONNULL_END
