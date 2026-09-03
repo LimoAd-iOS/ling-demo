@@ -1,0 +1,16 @@
+PODS:
+  - LingSDK (1.0.0)
+
+DEPENDENCIES:
+  - LingSDK (from `./LingSDK`)
+
+EXTERNAL SOURCES:
+  LingSDK:
+    :path: "./LingSDK"
+
+SPEC CHECKSUMS:
+  LingSDK: 8c79e3865d783163116892f3c18ccbfc5e5561aa
+
+PODFILE CHECKSUM: 1888fbf7ec9ad4de4127ac58bb967c6e557eaee5
+
+COCOAPODS: 1.16.2
