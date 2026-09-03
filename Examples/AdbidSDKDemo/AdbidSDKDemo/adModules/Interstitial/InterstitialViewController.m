@@ -1,0 +1,498 @@
+//
+//  InterstitialViewController.m
+//  LeadMoadAdSDKDemo
+//
+//  Created by youzhadoubao on 2025/9/19.
+//
+
+#import "InterstitialViewController.h"
+#import <LingSDK/LingSDK.h>
+#import "AppConfig.h"
+#import "AdbidInterstitialTokenTester.h"
+
+@interface InterstitialViewController () <LingAggInterstitialAdDelegate>
+
+/// 插屏广告实例
+@property (nonatomic, strong) LingAggInterstitialAd *interstitialAd;
+
+/// 加载按钮
+@property (nonatomic, strong) UIButton *loadButton;
+
+/// 展示按钮
+@property (nonatomic, strong) UIButton *showButton;
+
+/// 竞胜上报按钮
+@property (nonatomic, strong) UIButton *winNoticeButton;
+
+/// 竞败上报按钮
+@property (nonatomic, strong) UIButton *lossNoticeButton;
+
+/// C2S Token 加载按钮
+@property (nonatomic, strong) UIButton *tokenButton;
+
+/// 状态标签
+@property (nonatomic, strong) UILabel *statusLabel;
+
+/// 日志文本视图
+@property (nonatomic, strong) UITextView *logTextView;
+
+/// 广告位ID输入框
+@property (nonatomic, strong) UITextField *slotIdTextField;
+
+@property (nonatomic, strong) AdbidInterstitialTokenTester *tokenTester;
+
+@end
+
+@implementation InterstitialViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"插屏广告测试";
+    self.view.backgroundColor = [UIColor colorWithRed:245/255.0 green:247/255.0 blue:250/255.0 alpha:1.0];
+    self.tokenTester = [[AdbidInterstitialTokenTester alloc] init];
+
+    [self setupUI];
+    [self setupinterstitialAd];
+}
+
+#pragma mark - Setup
+
+- (void)setupUI {
+    // 广告位ID输入框
+    self.slotIdTextField = [[UITextField alloc] init];
+    self.slotIdTextField.placeholder = @"请输入广告位ID";
+
+    self.slotIdTextField.text = AppConfig.interstitalID;  // 默认广告位ID
+    self.slotIdTextField.borderStyle = UITextBorderStyleRoundedRect;
+    self.slotIdTextField.font = [UIFont systemFontOfSize:16];
+    self.slotIdTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    [self configurePlatformRightViewForTextField:self.slotIdTextField];
+    [self configureTextFieldStyle:self.slotIdTextField];
+    [self.view addSubview:self.slotIdTextField];
+
+    // 加载按钮
+    self.loadButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.loadButton setTitle:@"加载插屏广告" forState:UIControlStateNormal];
+    self.loadButton.backgroundColor = [UIColor systemBlueColor];
+    [self.loadButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.loadButton.layer.cornerRadius = 8;
+    self.loadButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    [self.loadButton addTarget:self action:@selector(loadButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self configureButton:self.loadButton backgroundColor:[self primaryColor]];
+    [self.view addSubview:self.loadButton];
+
+    // 展示按钮
+    self.showButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.showButton setTitle:@"展示插屏广告" forState:UIControlStateNormal];
+    self.showButton.backgroundColor = [UIColor systemGreenColor];
+    [self.showButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.showButton.layer.cornerRadius = 8;
+    self.showButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    self.showButton.enabled = NO;  // 初始禁用
+    [self.showButton addTarget:self action:@selector(showButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self configureButton:self.showButton backgroundColor:[UIColor colorWithRed:0.18 green:0.65 blue:0.35 alpha:1.0]];
+    [self.view addSubview:self.showButton];
+
+    // 竞胜上报按钮
+    self.winNoticeButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.winNoticeButton setTitle:@"竞胜上报" forState:UIControlStateNormal];
+    self.winNoticeButton.backgroundColor = [UIColor colorWithRed:0.0 green:0.7 blue:0.0 alpha:1.0];
+    [self.winNoticeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.winNoticeButton.layer.cornerRadius = 8;
+    self.winNoticeButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    [self.winNoticeButton addTarget:self action:@selector(winNoticeButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self configureButton:self.winNoticeButton backgroundColor:[UIColor colorWithRed:0.18 green:0.65 blue:0.35 alpha:1.0]];
+  //  [self.winNoticeButton setHidden:YES];
+    [self.view addSubview:self.winNoticeButton];
+
+    // 竞败上报按钮
+    self.lossNoticeButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.lossNoticeButton setTitle:@"竞败上报" forState:UIControlStateNormal];
+    self.lossNoticeButton.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0];
+    [self.lossNoticeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.lossNoticeButton.layer.cornerRadius = 8;
+    self.lossNoticeButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    [self.lossNoticeButton addTarget:self action:@selector(lossNoticeButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self configureButton:self.lossNoticeButton backgroundColor:[UIColor colorWithRed:0.42 green:0.46 blue:0.52 alpha:1.0]];
+    [self.view addSubview:self.lossNoticeButton];
+ //   [self.lossNoticeButton setHidden:YES];
+
+    // C2S Token 加载按钮
+    self.tokenButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.tokenButton setTitle:@"加载C2S广告" forState:UIControlStateNormal];
+    [self.tokenButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.tokenButton addTarget:self action:@selector(loadC2SButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self configureButton:self.tokenButton backgroundColor:[UIColor colorWithRed:0.92 green:0.45 blue:0.12 alpha:1.0]];
+    [self.view addSubview:self.tokenButton];
+
+    // 状态标签
+    self.statusLabel = [[UILabel alloc] init];
+    self.statusLabel.text = @"状态: 未加载";
+    self.statusLabel.textAlignment = NSTextAlignmentCenter;
+    self.statusLabel.font = [UIFont systemFontOfSize:14];
+    self.statusLabel.textColor = [UIColor darkGrayColor];
+    [self configureStatusLabelStyle:self.statusLabel];
+    [self.view addSubview:self.statusLabel];
+
+    // 日志文本视图
+    self.logTextView = [[UITextView alloc] init];
+    self.logTextView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
+    self.logTextView.font = [UIFont systemFontOfSize:12];
+    self.logTextView.editable = NO;
+    self.logTextView.layer.cornerRadius = 8;
+    self.logTextView.layer.borderWidth = 1;
+    self.logTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    [self configureLogTextViewStyle:self.logTextView];
+    [self.view addSubview:self.logTextView];
+
+    // 设置约束
+    [self setupConstraints];
+}
+
+- (void)configurePlatformRightViewForTextField:(UITextField *)textField {
+    NSString *platform = AppConfig.selectedPlatforms.firstObject ?: @"other";
+    UILabel *platformLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 52, 24)];
+    platformLabel.text = platform;
+    platformLabel.textAlignment = NSTextAlignmentCenter;
+    platformLabel.font = [UIFont systemFontOfSize:13 weight:UIFontWeightMedium];
+    platformLabel.textColor = [UIColor darkGrayColor];
+    textField.rightView = platformLabel;
+    textField.rightViewMode = UITextFieldViewModeAlways;
+}
+
+- (UIColor *)primaryColor {
+    return [UIColor colorWithRed:0.18 green:0.48 blue:0.95 alpha:1.0];
+}
+
+- (void)configureTextFieldStyle:(UITextField *)textField {
+    textField.backgroundColor = [UIColor whiteColor];
+    textField.layer.cornerRadius = 10;
+    textField.layer.borderWidth = 1;
+    textField.layer.borderColor = [UIColor colorWithWhite:0.88 alpha:1.0].CGColor;
+}
+
+- (void)configureButton:(UIButton *)button backgroundColor:(UIColor *)backgroundColor {
+    button.backgroundColor = backgroundColor;
+    button.layer.cornerRadius = 10;
+    button.layer.shadowColor = backgroundColor.CGColor;
+    button.layer.shadowOffset = CGSizeMake(0, 4);
+    button.layer.shadowRadius = 10;
+    button.layer.shadowOpacity = 0.16;
+    button.titleLabel.font = [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold];
+}
+
+- (void)configureStatusLabelStyle:(UILabel *)label {
+    label.backgroundColor = [UIColor whiteColor];
+    label.layer.cornerRadius = 10;
+    label.layer.borderWidth = 1;
+    label.layer.borderColor = [UIColor colorWithWhite:0.90 alpha:1.0].CGColor;
+    label.layer.masksToBounds = YES;
+}
+
+- (void)configureLogTextViewStyle:(UITextView *)textView {
+    textView.backgroundColor = [UIColor whiteColor];
+    textView.font = [UIFont monospacedSystemFontOfSize:12 weight:UIFontWeightRegular];
+    textView.textColor = [UIColor colorWithRed:0.16 green:0.20 blue:0.27 alpha:1.0];
+    textView.layer.cornerRadius = 10;
+    textView.layer.borderWidth = 1;
+    textView.layer.borderColor = [UIColor colorWithWhite:0.88 alpha:1.0].CGColor;
+    textView.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 10);
+}
+
+- (void)setupConstraints {
+    self.slotIdTextField.translatesAutoresizingMaskIntoConstraints = NO;
+    self.loadButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.showButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.winNoticeButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.lossNoticeButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.tokenButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.statusLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.logTextView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    [NSLayoutConstraint activateConstraints:@[
+        // 广告位ID输入框
+        [self.slotIdTextField.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:20],
+        [self.slotIdTextField.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:20],
+        [self.slotIdTextField.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-20],
+        [self.slotIdTextField.heightAnchor constraintEqualToConstant:44],
+
+        // 加载按钮
+        [self.loadButton.topAnchor constraintEqualToAnchor:self.slotIdTextField.bottomAnchor constant:14],
+        [self.loadButton.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:20],
+        [self.loadButton.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-20],
+        [self.loadButton.heightAnchor constraintEqualToConstant:46],
+
+        // 展示按钮
+        [self.showButton.topAnchor constraintEqualToAnchor:self.loadButton.bottomAnchor constant:12],
+        [self.showButton.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:20],
+        [self.showButton.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-20],
+        [self.showButton.heightAnchor constraintEqualToConstant:46],
+
+        // 竞胜上报按钮
+        [self.winNoticeButton.topAnchor constraintEqualToAnchor:self.showButton.bottomAnchor constant:12],
+        [self.winNoticeButton.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:20],
+        [self.winNoticeButton.trailingAnchor constraintEqualToAnchor:self.view.centerXAnchor constant:-10],
+        [self.winNoticeButton.heightAnchor constraintEqualToConstant:46],
+
+        // 竞败上报按钮
+        [self.lossNoticeButton.topAnchor constraintEqualToAnchor:self.showButton.bottomAnchor constant:12],
+        [self.lossNoticeButton.leadingAnchor constraintEqualToAnchor:self.view.centerXAnchor constant:10],
+        [self.lossNoticeButton.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-20],
+        [self.lossNoticeButton.heightAnchor constraintEqualToConstant:46],
+
+        // C2S Token 加载按钮
+        [self.tokenButton.topAnchor constraintEqualToAnchor:self.winNoticeButton.bottomAnchor constant:12],
+        [self.tokenButton.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:20],
+        [self.tokenButton.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-20],
+        [self.tokenButton.heightAnchor constraintEqualToConstant:46],
+
+        // 状态标签
+        [self.statusLabel.topAnchor constraintEqualToAnchor:self.tokenButton.bottomAnchor constant:16],
+        [self.statusLabel.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:20],
+        [self.statusLabel.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-20],
+        [self.statusLabel.heightAnchor constraintEqualToConstant:38],
+
+        // 日志文本视图
+        [self.logTextView.topAnchor constraintEqualToAnchor:self.statusLabel.bottomAnchor constant:15],
+        [self.logTextView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:20],
+        [self.logTextView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-20],
+        [self.logTextView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor constant:-20]
+    ]];
+}
+
+- (void)setupinterstitialAd {
+    // 创建激励视频广告实例
+    NSString *slotId = self.slotIdTextField.text.length > 0 ? self.slotIdTextField.text : @"100130105000001";
+    self.interstitialAd = [[LingAggInterstitialAd alloc] initWithSlotId:slotId];
+    self.interstitialAd.delegate = self;
+
+    [self addLog:[NSString stringWithFormat:@"插屏广告实例已创建，广告位ID: %@", slotId]];
+}
+
+#pragma mark - Button Actions
+
+- (void)loadButtonTapped {
+    // 获取当前输入的广告位ID
+    NSString *currentSlotId = self.slotIdTextField.text.length > 0 ? self.slotIdTextField.text : @"100130105000001";
+
+    
+
+    // 如果广告位ID发生变化，重新创建广告实例
+   
+    self.interstitialAd = [[LingAggInterstitialAd alloc] initWithSlotId:currentSlotId];
+    self.interstitialAd.delegate = self;
+    
+    [self addLog:[NSString stringWithFormat:@"开始加载插屏广告，广告位ID: %@", currentSlotId]];
+    self.statusLabel.text = @"状态: 加载中...";
+    self.loadButton.enabled = NO;
+    self.tokenButton.enabled = NO;
+    self.showButton.enabled = NO;
+    [self.interstitialAd loadAd];
+}
+
+- (void)loadC2SButtonTapped {
+    [self.slotIdTextField resignFirstResponder];
+
+    NSString *slotId = self.slotIdTextField.text.length > 0 ? self.slotIdTextField.text : @"100130105000001";
+    self.interstitialAd = [[LingAggInterstitialAd alloc] initWithSlotId:slotId];
+    self.interstitialAd.delegate = self;
+
+    [self addLog:[NSString stringWithFormat:@"开始加载插屏C2S广告，广告位ID: %@", slotId]];
+    self.statusLabel.text = @"状态: 正在获取C2S Token...";
+    self.loadButton.enabled = NO;
+    self.tokenButton.enabled = NO;
+    self.showButton.enabled = NO;
+
+    [self requestServerBidTokenConfigBeforeLoadForInterstitialAd:self.interstitialAd slotId:slotId];
+}
+
+- (void)requestServerBidTokenConfigBeforeLoadForInterstitialAd:(LingAggInterstitialAd *)interstitialAd
+                                                       slotId:(NSString *)slotId {
+    __weak typeof(self) weakSelf = self;
+    [LingAggSDKManager requestServerBidTokenConfigForPositionId:slotId completion:^(NSString * _Nullable sdkInfoConfig, NSError * _Nullable configError) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf || strongSelf.interstitialAd != interstitialAd) {
+            return;
+        }
+
+        if (configError) {
+            [strongSelf finishC2SLoadWithMessage:[NSString stringWithFormat:@"SDK Info获取失败: %@", configError.localizedDescription ?: @"unknown"]];
+            return;
+        }
+
+        [strongSelf.tokenTester getTokenWithAdId:slotId sdkInfo:sdkInfoConfig completion:^(BOOL success, NSDictionary * _Nullable config, NSError * _Nullable error) {
+            if (strongSelf.interstitialAd != interstitialAd) {
+                [strongSelf addLog:@"忽略已失效的插屏C2S Token请求结果"];
+                return;
+            }
+
+            if (!success || error) {
+                [strongSelf finishC2SLoadWithMessage:[NSString stringWithFormat:@"C2S Token获取失败: %@", error.localizedDescription ?: @"unknown"]];
+                return;
+            }
+
+            NSString *token = [config objectForKey:@"token"];
+            if (![token isKindOfClass:[NSString class]] || token.length == 0) {
+                [strongSelf finishC2SLoadWithMessage:@"C2S Token获取失败: 返回token为空"];
+                return;
+            }
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                strongSelf.statusLabel.text = @"状态: C2S Token已获取，正在加载...";
+            });
+            [interstitialAd loadAdWithToken:token];
+        }];
+    }];
+}
+
+- (void)finishC2SLoadWithMessage:(NSString *)message {
+    [self addLog:message];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.statusLabel.text = @"状态: C2S加载失败";
+        self.loadButton.enabled = YES;
+        self.tokenButton.enabled = YES;
+        self.showButton.enabled = NO;
+    });
+}
+
+- (void)showButtonTapped {
+    if ([self.interstitialAd isReady]) {
+        [self addLog:@"开始展示插屏广告..."];
+        self.statusLabel.text = @"状态: 展示中...";
+        [self.interstitialAd showAd:self];
+    } else {
+        [self addLog:@"广告未准备好，无法展示"];
+        self.statusLabel.text = @"状态: 广告未准备好";
+    }
+}
+
+- (void)winNoticeButtonTapped {
+    if (self.interstitialAd && self.interstitialAd.isReady) {
+        [self addLog:@"正在上报竞胜..."];
+        [self.interstitialAd winNotice:self.interstitialAd.eCPM];
+        [self addLog:[NSString stringWithFormat:@"竞胜上报成功，价格: %ld", (long)self.interstitialAd.eCPM]];
+    } else {
+        [self addLog:@"请先加载广告"];
+    }
+}
+
+- (void)lossNoticeButtonTapped {
+    if (self.interstitialAd && self.interstitialAd.isReady) {
+        [self addLog:@"正在上报竞败..."];
+        
+        LingAggBidLossInfo *info = [[LingAggBidLossInfo alloc] init];
+        info.winnerPrice = self.interstitialAd.eCPM + 10; // 模拟竞胜价格高于我方
+        info.winnerPlatform = LingAggPlatform_CSJ; // 模拟穿山甲竞胜
+        
+        [self.interstitialAd lossNotice:info];
+        [self addLog:[NSString stringWithFormat:@"竞败上报成功，竞胜价格: %ld", (long)info.winnerPrice]];
+    } else {
+        [self addLog:@"请先加载广告"];
+    }
+}
+
+#pragma mark - LingAggInterstitialAdDelegate
+// 广告请求成功
+- (void)interstitialAdDidLoad:(LingAggInterstitialAd *)interstitialAd {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self addLog:@"✅ 插屏广告加载成功"];
+        self.statusLabel.text = @"状态: 已加载，可以展示";
+        self.loadButton.enabled = YES;
+        self.tokenButton.enabled = YES;
+        self.showButton.enabled = YES;
+    });
+}
+// 广告请求失败
+- (void)interstitialAdFailedToLoad:(LingAggInterstitialAd *)interstitialAd withError:(NSError *)error {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self addLog:[NSString stringWithFormat:@"❌ 插屏广告加载失败: %@", error.localizedDescription]];
+        self.statusLabel.text = @"状态: 加载失败";
+        self.loadButton.enabled = YES;
+        self.tokenButton.enabled = YES;
+        self.showButton.enabled = NO;
+    });
+}
+
+- (void)interstitialAdDidShow:(LingAggInterstitialAd *)interstitialAd {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self addLog:@"📺 插屏广告开始展示"];
+        self.statusLabel.text = @"状态: 正在展示";
+    });
+}
+
+- (void)interstitialAdFailedToShow:(LingAggInterstitialAd *)interstitialAd  withError:(NSError *)error {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self addLog:[NSString stringWithFormat:@"❌ 插屏广告展示失败: %@", error.localizedDescription]];
+        self.statusLabel.text = @"状态: 展示失败";
+        self.showButton.enabled = [interstitialAd isReady];
+    });
+}
+
+//- (void)interstitialAdDidStartPlay:(LingAggInterstitialAd *)interstitialAd {
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self addLog:@"▶️ 视频开始播放"];
+//    });
+//}
+//
+//- (void)interstitialAdDidEndPlay:(LingAggInterstitialAd *)rewardedVideoAd withError:(NSError *_Nullable)error {
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        if (error == nil) {
+//            [self addLog:@"⏹️ 视频播放完成"];
+//        } else {
+//            [self addLog:@"⏹️ 视频播放失败"];
+//        }
+//    });
+//}
+
+//- (void)interstitialAdDidReward:(LingAggInterstitialAd *)interstitialAd {
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self addLog:@"🎁 用户获得奖励！"];
+//
+//        // 显示奖励提示
+//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"恭喜！"
+//                                                                       message:@"您已获得奖励！"
+//                                                                preferredStyle:UIAlertControllerStyleAlert];
+//        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+//        [self presentViewController:alert animated:YES completion:nil];
+//    });
+//}
+
+- (void)interstitialAdDidClick:(LingAggInterstitialAd *)interstitialAd {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self addLog:@"👆 用户点击了广告"];
+    });
+}
+
+- (void)interstitialAdDidClose:(LingAggInterstitialAd *)interstitialAd{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self addLog:@"❌ 插屏广告已关闭"];
+        self.statusLabel.text = @"状态: 已关闭，可重新加载";
+        self.showButton.enabled = NO;
+    });
+}
+
+- (void)interstitialAdDidFinishConversion:(LingAggInterstitialAd *)interstitialAd interactionType:(LingAggAdRedirectionType)interactionType{
+    [self addLog:@"👆 广告跳转了"];
+}
+
+#pragma mark - Helper Methods
+
+- (void)addLog:(NSString *)message {
+    NSLog(@"%@", message);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"HH:mm:ss.SSS";
+        NSString *timestamp = [formatter stringFromDate:[NSDate date]];
+
+        NSString *logMessage = [NSString stringWithFormat:@"[%@] %@\n", timestamp, message];
+        self.logTextView.text = [self.logTextView.text stringByAppendingString:logMessage];
+
+        // 滚动到底部
+        if (self.logTextView.text.length > 0) {
+            NSRange bottom = NSMakeRange(self.logTextView.text.length - 1, 1);
+            [self.logTextView scrollRangeToVisible:bottom];
+        }
+    });
+}
+
+@end

@@ -1,0 +1,6 @@
+framework module LingSDK {
+  umbrella header "LingSDK.h"
+  export *
+
+  module * { export * }
+}
