@@ -16,6 +16,9 @@
     "path": "."
   },
   "vendored_frameworks": "LingSDK.xcframework",
+  "resources": [
+    "ling.bundle"
+  ],
   "requires_arc": true,
   "static_framework": true,
   "pod_target_xcconfig": {

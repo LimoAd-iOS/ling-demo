@@ -115,6 +115,7 @@
 				3F5E35662E7A35C8004E9A2C /* Sources */,
 				3F5E35672E7A35C8004E9A2C /* Frameworks */,
 				3F5E35682E7A35C8004E9A2C /* Resources */,
+				2E5D2C6E1F3022A653A14976 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -174,6 +175,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2E5D2C6E1F3022A653A14976 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AdbidSDKDemo/Pods-AdbidSDKDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AdbidSDKDemo/Pods-AdbidSDKDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AdbidSDKDemo/Pods-AdbidSDKDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		395F695F5D25308ECFDA15A1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

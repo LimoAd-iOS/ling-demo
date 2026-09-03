@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.platform         = :ios, '13.0'
   s.source           = { :path => '.' }
   s.vendored_frameworks = 'LingSDK.xcframework'
-  #s.dependency 'MentaVL48SDK'
+  s.resources        = ['ling.bundle']
   s.requires_arc     = true
   s.static_framework = true
   s.pod_target_xcconfig = {

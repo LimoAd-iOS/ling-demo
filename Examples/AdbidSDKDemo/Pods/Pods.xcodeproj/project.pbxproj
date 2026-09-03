@@ -20,13 +20,13 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		71B1A5FA8C004096D9E48D5AA90CE748 /* Pods-AdbidSDKDemo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 416A0E333999DE1F3BAAE1D6495B7EAD /* Pods-AdbidSDKDemo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		71B1A5FA8C004096D9E48D5AA90CE748 /* Pods-AdbidSDKDemo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C89F244BEA2FAAD7D2C08A4A82C0DA09 /* Pods-AdbidSDKDemo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C423327A35714F05669CE7BB1B6FD40A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
-		ED0298C610D5DD2C9CE66F5E35800EF5 /* Pods-AdbidSDKDemo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8AA103017A72178D899D6C14004DBF /* Pods-AdbidSDKDemo-dummy.m */; };
+		ED0298C610D5DD2C9CE66F5E35800EF5 /* Pods-AdbidSDKDemo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 746BC546DB50C9EFFCEB2B99E35730BF /* Pods-AdbidSDKDemo-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BD5B8AA04B610799D74BFA61526B281C /* PBXContainerItemProxy */ = {
+		031D6BA7355871B3FFD682DE0CB82645 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -36,22 +36,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B8AA103017A72178D899D6C14004DBF /* Pods-AdbidSDKDemo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AdbidSDKDemo-dummy.m"; sourceTree = "<group>"; };
-		2762A1EA20917EDF4297F29145BAFF0A /* Pods-AdbidSDKDemo-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AdbidSDKDemo-acknowledgements.plist"; sourceTree = "<group>"; };
-		34CA0BC2FDB91FCAECB3DA3475A3E631 /* Pods-AdbidSDKDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AdbidSDKDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		021ADD19EBF6AAC8F016C76D3494458B /* LingSDK-xcframeworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "LingSDK-xcframeworks.sh"; sourceTree = "<group>"; };
+		26A484C0DF088095E89DDF412A14A652 /* Pods-AdbidSDKDemo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-AdbidSDKDemo.modulemap"; sourceTree = "<group>"; };
 		384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		411AD345EFA4ACB888B12F1E0CE189EB /* Pods-AdbidSDKDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AdbidSDKDemo.release.xcconfig"; sourceTree = "<group>"; };
-		416A0E333999DE1F3BAAE1D6495B7EAD /* Pods-AdbidSDKDemo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AdbidSDKDemo-umbrella.h"; sourceTree = "<group>"; };
 		520CD6B0AD7A7EA10F082C4DC1AC8E37 /* Pods-AdbidSDKDemo */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-AdbidSDKDemo"; path = Pods_AdbidSDKDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		54F5D337CA42C1DA96B8C8B7E6FEDE9B /* Pods-AdbidSDKDemo-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AdbidSDKDemo-acknowledgements.markdown"; sourceTree = "<group>"; };
-		5D4E59D7ED23BA13ECE193D89AE4289A /* Pods-AdbidSDKDemo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-AdbidSDKDemo.modulemap"; sourceTree = "<group>"; };
-		77B2541706A027BA55090CF3DE178C24 /* LingSDK.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; path = LingSDK.xcframework; sourceTree = "<group>"; };
-		88CEAD8EE2AD0965878CBA64F50A5D87 /* LingSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LingSDK.debug.xcconfig; sourceTree = "<group>"; };
-		96247BED73C3F0FEB2C7C9EE9D218569 /* LingSDK-xcframeworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "LingSDK-xcframeworks.sh"; sourceTree = "<group>"; };
+		55F2A3E19B1A30EB9E33AF4F7EFEBE6E /* Pods-AdbidSDKDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AdbidSDKDemo.release.xcconfig"; sourceTree = "<group>"; };
+		597FFC30C1317501AC9310BB51BFA654 /* Pods-AdbidSDKDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AdbidSDKDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		5C2DFD39AE7B5B4D2BA51407AFF96EB0 /* LingSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = LingSDK.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		6B89F3581CE36F17BDB9FFB2756AA8D3 /* Pods-AdbidSDKDemo-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AdbidSDKDemo-resources.sh"; sourceTree = "<group>"; };
+		746BC546DB50C9EFFCEB2B99E35730BF /* Pods-AdbidSDKDemo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AdbidSDKDemo-dummy.m"; sourceTree = "<group>"; };
+		7B89627369B17D528912EECFB0FFE812 /* LingSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LingSDK.debug.xcconfig; sourceTree = "<group>"; };
+		91AF44B4534D0B280096CED69B48657B /* Pods-AdbidSDKDemo-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AdbidSDKDemo-Info.plist"; sourceTree = "<group>"; };
+		9B96DFFFCBABB0B8C5222141D52E576C /* Pods-AdbidSDKDemo-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AdbidSDKDemo-acknowledgements.plist"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		B44924A046D7555A3A441E04593A1B9D /* Pods-AdbidSDKDemo-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AdbidSDKDemo-Info.plist"; sourceTree = "<group>"; };
-		C41B5B9242C161EB596316F476ADD498 /* LingSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = LingSDK.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		FEFC87D93EF0DD2B9D73B8AEC2EF1EA3 /* LingSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LingSDK.release.xcconfig; sourceTree = "<group>"; };
+		B2AAB638394D25D82060A092FEBDD0F3 /* Pods-AdbidSDKDemo-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AdbidSDKDemo-acknowledgements.markdown"; sourceTree = "<group>"; };
+		C47D65B57EC396B1737F20A7FADA2C92 /* LingSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LingSDK.release.xcconfig; sourceTree = "<group>"; };
+		C89F244BEA2FAAD7D2C08A4A82C0DA09 /* Pods-AdbidSDKDemo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AdbidSDKDemo-umbrella.h"; sourceTree = "<group>"; };
+		DEC601316DB8D1832E2F900DDA66E112 /* ling.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; path = ling.bundle; sourceTree = "<group>"; };
+		EB9CDC34E2B439249BA245CFD66609F9 /* LingSDK.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; path = LingSDK.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,84 +68,59 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		073E983EC7797E832AEE23C9038E0094 /* Frameworks */ = {
+		1061C12199435B516295D323FCFA07C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				77B2541706A027BA55090CF3DE178C24 /* LingSDK.xcframework */,
+				EB9CDC34E2B439249BA245CFD66609F9 /* LingSDK.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		583566FAE7DF20B8A48330C0725E242C /* LingSDK */ = {
+		865BD44DAE847212545627022995A436 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				073E983EC7797E832AEE23C9038E0094 /* Frameworks */,
-				96933E8319A7AAF388BC58AC9041A94D /* Pod */,
-				A3B122A12BA9F24A0AAF9FC5EE2C3244 /* Support Files */,
+				B6EAB856D0887B3FA4791CA8860C5F0B /* Pods-AdbidSDKDemo */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		90B5381772623C9555119C3635BE255E /* LingSDK */ = {
+			isa = PBXGroup;
+			children = (
+				DEC601316DB8D1832E2F900DDA66E112 /* ling.bundle */,
+				1061C12199435B516295D323FCFA07C8 /* Frameworks */,
+				EA2DAD0BA8058842E9DCA75AEA15DD44 /* Pod */,
+				E6E5C49AC17C5C73E2FC4DB59C5ACF15 /* Support Files */,
 			);
 			name = LingSDK;
 			path = ../LingSDK;
 			sourceTree = "<group>";
 		};
-		88900134852853FB9B5B95EDC118E33D /* Pods-AdbidSDKDemo */ = {
+		B6EAB856D0887B3FA4791CA8860C5F0B /* Pods-AdbidSDKDemo */ = {
 			isa = PBXGroup;
 			children = (
-				5D4E59D7ED23BA13ECE193D89AE4289A /* Pods-AdbidSDKDemo.modulemap */,
-				54F5D337CA42C1DA96B8C8B7E6FEDE9B /* Pods-AdbidSDKDemo-acknowledgements.markdown */,
-				2762A1EA20917EDF4297F29145BAFF0A /* Pods-AdbidSDKDemo-acknowledgements.plist */,
-				0B8AA103017A72178D899D6C14004DBF /* Pods-AdbidSDKDemo-dummy.m */,
-				B44924A046D7555A3A441E04593A1B9D /* Pods-AdbidSDKDemo-Info.plist */,
-				416A0E333999DE1F3BAAE1D6495B7EAD /* Pods-AdbidSDKDemo-umbrella.h */,
-				34CA0BC2FDB91FCAECB3DA3475A3E631 /* Pods-AdbidSDKDemo.debug.xcconfig */,
-				411AD345EFA4ACB888B12F1E0CE189EB /* Pods-AdbidSDKDemo.release.xcconfig */,
+				26A484C0DF088095E89DDF412A14A652 /* Pods-AdbidSDKDemo.modulemap */,
+				B2AAB638394D25D82060A092FEBDD0F3 /* Pods-AdbidSDKDemo-acknowledgements.markdown */,
+				9B96DFFFCBABB0B8C5222141D52E576C /* Pods-AdbidSDKDemo-acknowledgements.plist */,
+				746BC546DB50C9EFFCEB2B99E35730BF /* Pods-AdbidSDKDemo-dummy.m */,
+				91AF44B4534D0B280096CED69B48657B /* Pods-AdbidSDKDemo-Info.plist */,
+				6B89F3581CE36F17BDB9FFB2756AA8D3 /* Pods-AdbidSDKDemo-resources.sh */,
+				C89F244BEA2FAAD7D2C08A4A82C0DA09 /* Pods-AdbidSDKDemo-umbrella.h */,
+				597FFC30C1317501AC9310BB51BFA654 /* Pods-AdbidSDKDemo.debug.xcconfig */,
+				55F2A3E19B1A30EB9E33AF4F7EFEBE6E /* Pods-AdbidSDKDemo.release.xcconfig */,
 			);
 			name = "Pods-AdbidSDKDemo";
 			path = "Target Support Files/Pods-AdbidSDKDemo";
-			sourceTree = "<group>";
-		};
-		9094F93586942B8AB18A69AE1BF41664 /* Development Pods */ = {
-			isa = PBXGroup;
-			children = (
-				583566FAE7DF20B8A48330C0725E242C /* LingSDK */,
-			);
-			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		96933E8319A7AAF388BC58AC9041A94D /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				C41B5B9242C161EB596316F476ADD498 /* LingSDK.podspec */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
-		9D37E6A2F65E7BFFC7766093E04DCF33 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				88900134852853FB9B5B95EDC118E33D /* Pods-AdbidSDKDemo */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		A3B122A12BA9F24A0AAF9FC5EE2C3244 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				96247BED73C3F0FEB2C7C9EE9D218569 /* LingSDK-xcframeworks.sh */,
-				88CEAD8EE2AD0965878CBA64F50A5D87 /* LingSDK.debug.xcconfig */,
-				FEFC87D93EF0DD2B9D73B8AEC2EF1EA3 /* LingSDK.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../Pods/Target Support Files/LingSDK";
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				9094F93586942B8AB18A69AE1BF41664 /* Development Pods */,
+				DF2CEF4F97EBB2963595B50451A584C5 /* Development Pods */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
 				D17A1D401489916EEB6241791B5FD1CD /* Products */,
-				9D37E6A2F65E7BFFC7766093E04DCF33 /* Targets Support Files */,
+				865BD44DAE847212545627022995A436 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -163,12 +140,39 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DF2CEF4F97EBB2963595B50451A584C5 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				90B5381772623C9555119C3635BE255E /* LingSDK */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
 		E4801F62A6B08CD9B5410329F1A18FDE /* iOS */ = {
 			isa = PBXGroup;
 			children = (
 				384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		E6E5C49AC17C5C73E2FC4DB59C5ACF15 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				021ADD19EBF6AAC8F016C76D3494458B /* LingSDK-xcframeworks.sh */,
+				7B89627369B17D528912EECFB0FFE812 /* LingSDK.debug.xcconfig */,
+				C47D65B57EC396B1737F20A7FADA2C92 /* LingSDK.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Pods/Target Support Files/LingSDK";
+			sourceTree = "<group>";
+		};
+		EA2DAD0BA8058842E9DCA75AEA15DD44 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				5C2DFD39AE7B5B4D2BA51407AFF96EB0 /* LingSDK.podspec */,
+			);
+			name = Pod;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,7 +201,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				E506E26271C77219A69171497A6D0776 /* PBXTargetDependency */,
+				690785ACE45B99E9B55CA7083661A3C9 /* PBXTargetDependency */,
 			);
 			name = "Pods-AdbidSDKDemo";
 			productName = Pods_AdbidSDKDemo;
@@ -276,18 +280,18 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E506E26271C77219A69171497A6D0776 /* PBXTargetDependency */ = {
+		690785ACE45B99E9B55CA7083661A3C9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = LingSDK;
 			target = EB85C3AABCCCB5D1ED295607B963CBDD /* LingSDK */;
-			targetProxy = BD5B8AA04B610799D74BFA61526B281C /* PBXContainerItemProxy */;
+			targetProxy = 031D6BA7355871B3FFD682DE0CB82645 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		408C279351887E6D3CE13EC3290E20AB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 411AD345EFA4ACB888B12F1E0CE189EB /* Pods-AdbidSDKDemo.release.xcconfig */;
+			baseConfigurationReference = 55F2A3E19B1A30EB9E33AF4F7EFEBE6E /* Pods-AdbidSDKDemo.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -329,7 +333,7 @@
 		};
 		62DBE2D49AB87B4D6989D1E32983AF3F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 88CEAD8EE2AD0965878CBA64F50A5D87 /* LingSDK.debug.xcconfig */;
+			baseConfigurationReference = 7B89627369B17D528912EECFB0FFE812 /* LingSDK.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -349,7 +353,7 @@
 		};
 		7C102919B0B4B4294F342B1DA745F875 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 34CA0BC2FDB91FCAECB3DA3475A3E631 /* Pods-AdbidSDKDemo.debug.xcconfig */;
+			baseConfigurationReference = 597FFC30C1317501AC9310BB51BFA654 /* Pods-AdbidSDKDemo.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -518,7 +522,7 @@
 		};
 		FF70E19A1347D9D500A4985C0DAF0876 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FEFC87D93EF0DD2B9D73B8AEC2EF1EA3 /* LingSDK.release.xcconfig */;
+			baseConfigurationReference = C47D65B57EC396B1737F20A7FADA2C92 /* LingSDK.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
