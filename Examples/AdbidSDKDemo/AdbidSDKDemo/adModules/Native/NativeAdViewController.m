@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, AdStatus) {
     AdStatusError      // 错误状态
 };
 
-@interface NativeAdViewController () <LingAggNativeAdDelegate,LingAggRewardVideoAdDelegate,LingAggSplashAdDelegate,UIScrollViewDelegate>
+@interface NativeAdViewController () <LingAggNativeAdDelegate,LingAggNativeMediaViewDelegate,LingAggRewardVideoAdDelegate,LingAggSplashAdDelegate,UIScrollViewDelegate>
 
 @property (nonatomic, strong) LingAggNativeAd *nativeAd;
 @property (nonatomic, strong) NativeFeedAdView *customAdView;
@@ -709,6 +709,7 @@ typedef NS_ENUM(NSInteger, AdStatus) {
     if (self.fullscreenAdView.mediaView.superview) {
         [self.fullscreenAdView.mediaView removeFromSuperview];
     }
+    self.fullscreenAdView.mediaView.delegate = self;
     self.fullscreenAdView.mediaView.translatesAutoresizingMaskIntoConstraints = NO;
     self.fullscreenAdView.mediaView.backgroundColor = [self isFLinkNativeAd] ? [UIColor blackColor] : [UIColor clearColor];
     self.fullscreenAdView.mediaView.userInteractionEnabled = YES;
